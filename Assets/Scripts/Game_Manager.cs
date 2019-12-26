@@ -8,28 +8,40 @@ public class Game_Manager : MonoBehaviour
     public AudioSource[] audio_FX_Source;
     public float bomb_Shake_Timer;
 
+    Fade_Out_Title fadeOutScript;
+    Jet_FlyBy jet_Boolean;
     Camera_Shake camera_1;
 
     void Start()
     {
-        camera_1 = FindObjectOfType<Camera_Shake>();
-        /*
-        audio_FX_Source[0].clip = sound_FX_Array[2];
+        //camera_1 = FindObjectOfType<Camera_Shake>();
+
+        //audio_FX_Source[0].clip = sound_FX_Array[2];
+        //audio_FX_Source[0].Play();
+        //audio_FX_Source[1].clip = sound_FX_Array[3];
+        //audio_FX_Source[1].Play();        
+
+        audio_FX_Source[0].clip = sound_FX_Array[0];
         audio_FX_Source[0].Play();
-        audio_FX_Source[1].clip = sound_FX_Array[3];
-        audio_FX_Source[1].Play();
-        */
-        StartCoroutine(Bomb_Drop());
+
+        jet_Boolean = FindObjectOfType<Jet_FlyBy>();
+        fadeOutScript = FindObjectOfType<Fade_Out_Title>();
+        //StartCoroutine(Bomb_Drop());
     }
 
     private void Update()
     {
-        bomb_Shake_Timer += Time.deltaTime;
-        if (bomb_Shake_Timer >= sound_FX_Array[2].length)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            camera_1.shouldShake = true;
-            bomb_Shake_Timer = 0;
+            StartCoroutine(jet_Boolean.Jet_Sound());
+            StartCoroutine(fadeOutScript.Fade_Out_Routine());
         }
+        //bomb_Shake_Timer += Time.deltaTime;
+        //if (bomb_Shake_Timer >= sound_FX_Array[2].length)
+        //{
+        //    camera_1.shouldShake = true;
+        //    bomb_Shake_Timer = 0;
+        //}
     }
 
     IEnumerator In_Time()

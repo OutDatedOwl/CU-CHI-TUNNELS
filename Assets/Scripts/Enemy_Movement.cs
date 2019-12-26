@@ -90,7 +90,7 @@ public class Enemy_Movement : MonoBehaviour
         monster_HP--;
         if (monster_HP == 0)
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
